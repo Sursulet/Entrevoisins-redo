@@ -1,2 +1,2 @@
 # Entrevoisins-redo
- Développeur d'application Android - OPENCLASSROOS - P3
+ Développeur d'application Android - OPENCLASSROOMS - P3
