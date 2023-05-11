@@ -1,14 +1,16 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 
-public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
+public class ListNeighbourPagerAdapter extends FragmentStateAdapter {
 
-    public ListNeighbourPagerAdapter(FragmentManager fm) {
-        super(fm);
+    public ListNeighbourPagerAdapter(FragmentManager fm, Lifecycle lifecycle) {
+        super(fm,lifecycle);
     }
 
     /**
@@ -16,8 +18,9 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      * @param position
      * @return
      */
+    @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         return NeighbourFragment.newInstance();
     }
 
@@ -26,7 +29,5 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      * @return
      */
     @Override
-    public int getCount() {
-        return 1;
-    }
+    public int getItemCount() { return 1; }
 }

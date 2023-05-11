@@ -1,11 +1,13 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.viewpager.widget.ViewPager;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.openclassrooms.entrevoisins.R;
 
 public class ListNeighbourActivity extends AppCompatActivity {
@@ -16,7 +18,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
     //@BindView(R.id.toolbar)
     Toolbar mToolbar;
     //@BindView(R.id.container)
-    ViewPager mViewPager;
+    ViewPager2 mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
 
@@ -27,10 +29,12 @@ public class ListNeighbourActivity extends AppCompatActivity {
         //ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
-        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager(), getLifecycle());
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        //mViewPager.registerOnPageChangeCallback(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        //mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText("OBJECT" + (position + 1))).attach();
 
     }
 
