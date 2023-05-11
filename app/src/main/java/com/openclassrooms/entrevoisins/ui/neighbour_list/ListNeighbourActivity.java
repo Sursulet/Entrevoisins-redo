@@ -8,18 +8,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.openclassrooms.entrevoisins.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class ListNeighbourActivity extends AppCompatActivity {
 
     // UI Components
-    @BindView(R.id.tabs)
+    //@BindView(R.id.tabs)
     TabLayout mTabLayout;
-    @BindView(R.id.toolbar)
+    //@BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.container)
+    //@BindView(R.id.container)
     ViewPager mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
@@ -28,7 +24,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_neighbour);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
         mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
@@ -38,7 +34,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.add_neighbour)
+    //@OnClick(R.id.add_neighbour)
     void addNeighbour() {
         AddNeighbourActivity.navigate(this);
     }
