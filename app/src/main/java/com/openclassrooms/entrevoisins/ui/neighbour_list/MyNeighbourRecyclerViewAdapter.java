@@ -1,7 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +15,17 @@ import java.util.List;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    private OnClickListener mListener;
+
+    public void setOnClickListener(OnClickListener listener) {
+        this.mListener = listener;
+    }
+
+    interface OnClickListener {
+        void onItemClick(Neighbour neighbour);
+
+        void onDelete(Neighbour neighbour);
+    }
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
         mNeighbours = items;
@@ -25,7 +35,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         FragmentNeighbourBinding binding = FragmentNeighbourBinding
                 .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, mListener);
     }
 
     @Override
@@ -40,11 +50,13 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public FragmentNeighbourBinding binding;
+        private FragmentNeighbourBinding binding;
+        private OnClickListener mListener;
 
-        public ViewHolder(FragmentNeighbourBinding binding) {
+        public ViewHolder(FragmentNeighbourBinding binding, OnClickListener listener) {
             super(binding.getRoot());
             this.binding = binding;
+            this.mListener = listener;
         }
 
         public void bind(Neighbour neighbour) {
@@ -53,10 +65,15 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                     .load(neighbour.getAvatarUrl())
                     .apply(RequestOptions.circleCropTransform())
                     .into(binding.itemListAvatar);
-            binding.itemListDeleteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+            binding.itemListDeleteButton.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.onDelete(neighbour);
+                }
+            });
+
+            binding.getRoot().setOnClickListener(view -> {
+                if (mListener != null) {
+                    mListener.onItemClick(neighbour);
                 }
             });
         }
