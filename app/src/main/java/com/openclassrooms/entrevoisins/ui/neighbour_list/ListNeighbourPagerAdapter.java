@@ -29,5 +29,5 @@ public class ListNeighbourPagerAdapter extends FragmentStateAdapter {
      * @return
      */
     @Override
-    public int getItemCount() { return 1; }
+    public int getItemCount() { return 2; }
 }
