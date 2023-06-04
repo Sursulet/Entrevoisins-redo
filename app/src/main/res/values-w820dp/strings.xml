@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_a_neighbour">Add a new neighbour</string>
+    <string name="tabs_content_description">Two tab: My neighbours and Favorites</string>
 </resources>
