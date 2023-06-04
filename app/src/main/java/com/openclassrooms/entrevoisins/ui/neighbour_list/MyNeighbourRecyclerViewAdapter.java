@@ -57,16 +57,15 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //@BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
-        //@BindView(R.id.item_list_name)
         public TextView mNeighbourName;
-        //@BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
 
         public ViewHolder(View view) {
             super(view);
-            //ButterKnife.bind(this, view);
+            mNeighbourAvatar = view.findViewById((R.id.item_list_avatar));
+            mNeighbourName = view.findViewById(R.id.item_list_name);
+            mDeleteButton = view.findViewById(R.id.item_list_delete_button);
         }
     }
 }
