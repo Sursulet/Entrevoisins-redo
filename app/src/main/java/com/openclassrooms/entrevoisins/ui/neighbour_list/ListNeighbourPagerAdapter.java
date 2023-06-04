@@ -21,7 +21,7 @@ public class ListNeighbourPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return NeighbourFragment.newInstance();
+        return NeighbourFragment.newInstance(position);
     }
 
     /**
