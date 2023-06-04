@@ -2,31 +2,41 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.os.Bundle;
 
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.databinding.ActivityListNeighbourBinding;
 
 public class ListNeighbourActivity extends AppCompatActivity {
 
+    @StringRes
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_neighbour_title, R.string.tab_favorites_title};
+
     // UI Components
-    //@BindView(R.id.tabs)
+    private ActivityListNeighbourBinding binding;
     TabLayout mTabLayout;
-    //@BindView(R.id.toolbar)
     Toolbar mToolbar;
-    //@BindView(R.id.container)
     ViewPager2 mViewPager;
+    FloatingActionButton mFAB;
 
     ListNeighbourPagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_neighbour);
-        //ButterKnife.bind(this);
+        binding = ActivityListNeighbourBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        mToolbar = binding.toolbar;
+        mTabLayout = binding.tabs;
+        mViewPager = binding.container;
+        mFAB = binding.addNeighbour;
 
         setSupportActionBar(mToolbar);
         mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager(), getLifecycle());
@@ -34,11 +44,11 @@ public class ListNeighbourActivity extends AppCompatActivity {
         //mViewPager.registerOnPageChangeCallback(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         //mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText("OBJECT" + (position + 1))).attach();
+        new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText(TAB_TITLES[position])).attach();
 
+        mFAB.setOnClickListener(view -> addNeighbour());
     }
 
-    //@OnClick(R.id.add_neighbour)
     void addNeighbour() {
         AddNeighbourActivity.navigate(this);
     }
