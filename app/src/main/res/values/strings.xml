@@ -4,4 +4,5 @@
     <string name="tab_favorites_title">Favorites</string>
     <string name="activity_new_neighbour">New neighbour</string>
     <string name="add_a_neighbour">Add a new neighbour</string>
+    <string name="tabs_content_description">Two tab: My neighbours and Favorites</string>
 </resources>
