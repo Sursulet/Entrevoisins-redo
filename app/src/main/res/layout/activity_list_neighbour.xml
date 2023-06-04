@@ -29,21 +29,8 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorHeight="3dp">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_neighbour_title" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabItem2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_favorites_title" />
-
-        </com.google.android.material.tabs.TabLayout>
+            app:tabIndicatorHeight="3dp"
+            android:contentDescription="@string/tabs_content_description"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -54,11 +41,12 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_neighbour"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_person_add_white_24dp" />
+        app:srcCompat="@drawable/ic_person_add_white_24dp"
+        android:contentDescription="@string/add_a_neighbour" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
