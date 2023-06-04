@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.openclassrooms.entrevoisins.databinding.FragmentNeighbourListBinding;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -27,12 +26,12 @@ public class NeighbourFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-
     private int mIndex = 0;
 
 
     /**
      * Create and return a new instance
+     *
      * @return @{@link NeighbourFragment}
      */
     public static NeighbourFragment newInstance(int position) {
@@ -78,7 +77,19 @@ public class NeighbourFragment extends Fragment {
                 mNeighbours = mApiService.getFavorite();
                 break;
         }*/
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        MyNeighbourRecyclerViewAdapter mAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnClickListener(new MyNeighbourRecyclerViewAdapter.OnClickListener() {
+            @Override
+            public void onItemClick(Neighbour neighbour) {
+
+            }
+
+            @Override
+            public void onDelete(Neighbour neighbour) {
+                onDeleteNeighbour(neighbour);
+            }
+        });
     }
 
     @Override
@@ -95,10 +106,11 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Fired if the user clicks on a delete button
-     * @param event
+     *
+     * @param neighbour
      */
-    public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        mApiService.deleteNeighbour(event.neighbour);
+    public void onDeleteNeighbour(Neighbour neighbour) {
+        mApiService.deleteNeighbour(neighbour);
         initList();
     }
 }
