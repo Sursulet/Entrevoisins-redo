@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.databinding.FragmentNeighbourListBinding;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
@@ -82,7 +84,8 @@ public class NeighbourFragment extends Fragment {
         mAdapter.setOnClickListener(new MyNeighbourRecyclerViewAdapter.OnClickListener() {
             @Override
             public void onItemClick(Neighbour neighbour) {
-
+                NavHostFragment.findNavController(NeighbourFragment.this)
+                        .navigate(R.id.action_home_to_detail_neighbour);
             }
 
             @Override
