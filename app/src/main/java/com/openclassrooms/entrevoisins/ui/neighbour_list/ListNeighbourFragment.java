@@ -33,7 +33,7 @@ public class ListNeighbourFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.container.setAdapter(new ListNeighbourPagerAdapter(getParentFragmentManager(), getLifecycle()));
+        binding.container.setAdapter(new ListNeighbourPagerAdapter(getChildFragmentManager(), getLifecycle()));
         new TabLayoutMediator(binding.tabs,binding.container, (tab, position) -> tab.setText(TAB_TITLES[position])).attach();
 
         binding.addNeighbour.setOnClickListener(new View.OnClickListener() {
