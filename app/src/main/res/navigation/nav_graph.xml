@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_home_to_add_neighbour"
             app:destination="@id/add_neighbour" />
+        <action
+            android:id="@+id/action_home_to_detail_neighbour"
+            app:destination="@id/detail_neighbour" />
     </fragment>
 
     <fragment android:id="@+id/add_neighbour"
@@ -21,15 +24,6 @@
         <action
             android:id="@+id/action_add_neighbour_to_home"
             app:destination="@id/home" />
-    </fragment>
-
-    <fragment android:id="@+id/list_neighbours"
-        android:name="com.openclassrooms.entrevoisins.ui.neighbour_list.NeighbourFragment"
-        android:label="fragment neighbour list"
-        tools:layout="@layout/fragment_neighbour_list">
-        <action
-            android:id="@+id/action_list_neighbours_to_detail_neighbour"
-            app:destination="@id/detail_neighbour" />
     </fragment>
 
     <fragment android:id="@+id/detail_neighbour"
