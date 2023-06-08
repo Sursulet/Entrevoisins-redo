@@ -5,4 +5,5 @@
     <string name="activity_new_neighbour">New neighbour</string>
     <string name="add_a_neighbour">Add a new neighbour</string>
     <string name="tabs_content_description">Two tab: My neighbours and Favorites</string>
+    <string name="content_description_avatar_neighbour">Avatar neighbour</string>
 </resources>
