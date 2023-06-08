@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.databinding.FragmentNeighbourListBinding;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
@@ -54,7 +54,7 @@ public class NeighbourFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentNeighbourListBinding.inflate(inflater, container, false);
         View view = mBinding.getRoot();
@@ -84,8 +84,9 @@ public class NeighbourFragment extends Fragment {
         mAdapter.setOnClickListener(new MyNeighbourRecyclerViewAdapter.OnClickListener() {
             @Override
             public void onItemClick(Neighbour neighbour) {
+                ListNeighbourFragmentDirections.ActionHomeToDetailNeighbour action = ListNeighbourFragmentDirections.actionHomeToDetailNeighbour(neighbour.getId());
                 NavHostFragment.findNavController(NeighbourFragment.this)
-                        .navigate(R.id.action_home_to_detail_neighbour);
+                        .navigate(action);
             }
 
             @Override
