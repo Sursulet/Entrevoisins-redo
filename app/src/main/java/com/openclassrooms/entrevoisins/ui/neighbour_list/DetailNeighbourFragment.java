@@ -9,7 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.databinding.FragmentDetailNeighbourBinding;
+import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +32,9 @@ public class DetailNeighbourFragment extends Fragment {
     private String mParam2;
 
     private FragmentDetailNeighbourBinding mBinding;
+    private Long mArg;
+    private NeighbourApiService mApiService;
+    private Neighbour mNeighbour;
 
     public DetailNeighbourFragment() {
         // Required empty public constructor
@@ -57,13 +64,15 @@ public class DetailNeighbourFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mArg = DetailNeighbourFragmentArgs.fromBundle(getArguments()).getId();
         }
+        mApiService = DI.getNeighbourApiService();
+        mNeighbour = mApiService.getNeighbours().stream().filter(neighbour -> mArg.equals(neighbour.getId())).findFirst().orElse(null);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         mBinding = FragmentDetailNeighbourBinding.inflate(getLayoutInflater(), container, false);
         return mBinding.getRoot();
     }
@@ -71,6 +80,8 @@ public class DetailNeighbourFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mBinding.toolbar.setTitle(mNeighbour.getName());
+        Glide.with(this).load(mNeighbour.getAvatarUrl()).into(mBinding.detailAvatar);
     }
 
     @Override
