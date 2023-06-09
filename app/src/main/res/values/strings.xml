@@ -7,4 +7,5 @@
     <string name="tabs_content_description">Two tab: My neighbours and Favorites</string>
     <string name="content_description_avatar_neighbour">Avatar neighbour</string>
     <string name="detail_about_me">A propos de moi</string>
+    <string name="favorite">Add neighbour in favorite list</string>
 </resources>
