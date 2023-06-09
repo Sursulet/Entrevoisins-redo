@@ -1,6 +1,5 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,9 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -39,13 +37,15 @@ public class AddNeighbourFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mBinding = FragmentAddNeighbourBinding.inflate(getLayoutInflater(),container,false);
-        return (mBinding.getRoot());
+        mBinding = FragmentAddNeighbourBinding.inflate(getLayoutInflater(), container, false);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mBinding.toolbar.setNavigationOnClickListener(v ->
+                NavHostFragment.findNavController(AddNeighbourFragment.this).navigateUp());
         init();
     }
 
@@ -54,15 +54,6 @@ public class AddNeighbourFragment extends Fragment {
         super.onDestroyView();
         mBinding = null;
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     private void init() {
         mNeighbourImage = randomImage();
@@ -70,15 +61,19 @@ public class AddNeighbourFragment extends Fragment {
                 .apply(RequestOptions.circleCropTransform()).into(mBinding.avatar);
         mBinding.nameLyt.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
                 mBinding.create.setEnabled(s.length() > 0);
             }
         });
-
+        mBinding.create.setOnClickListener(view -> addNeighbour());
     }
 
     void addNeighbour() {
@@ -91,23 +86,15 @@ public class AddNeighbourFragment extends Fragment {
                 mBinding.aboutMeLyt.getEditText().getText().toString()
         );
         mApiService.createNeighbour(neighbour);
-        //finish();
+        NavHostFragment.findNavController(AddNeighbourFragment.this).navigateUp();
     }
 
     /**
      * Generate a random image. Useful to mock image picker
+     *
      * @return String
      */
     String randomImage() {
-        return "https://i.pravatar.cc/150?u="+ System.currentTimeMillis();
-    }
-
-    /**
-     * Used to navigate to this activity
-     * @param activity
-     */
-    public static void navigate(FragmentActivity activity) {
-        Intent intent = new Intent(activity, AddNeighbourFragment.class);
-        ActivityCompat.startActivity(activity, intent, null);
+        return "https://i.pravatar.cc/150?u=" + System.currentTimeMillis();
     }
 }
