@@ -1,13 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Theme.App" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="Theme.App" parent="Theme.Material3.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorOnSurface">@android:color/white</item>
     </style>
+
+    <style name="Theme.App.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.App.AppBarOverlay" parent="ThemeOverlay.Material3.Dark" />
+    <style name="Theme.App.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
