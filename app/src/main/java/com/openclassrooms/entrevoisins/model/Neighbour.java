@@ -95,8 +95,8 @@ public class Neighbour {
         return isFavorite;
     }
 
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
+    public void setFavorite() {
+        this.isFavorite = !this.isFavorite;
     }
 
     @Override
