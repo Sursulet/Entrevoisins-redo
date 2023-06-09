@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Dummy mock for the Api
  */
-public class DummyNeighbourApiService implements  NeighbourApiService {
+public class DummyNeighbourApiService implements NeighbourApiService {
 
     private final List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
 
@@ -32,6 +32,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
 
     /**
      * {@inheritDoc}
+     *
      * @param neighbour
      */
     @Override
@@ -44,5 +45,20 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         Predicate<Neighbour> isFavorite = Neighbour::isFavorite;
         List<Neighbour> results = neighbours.stream().filter(isFavorite).collect(Collectors.toList());
         return results;
+    }
+
+    @Override
+    public Neighbour getNeighbour(Long id) {
+        Neighbour result = neighbours.stream()
+                .filter(neighbour -> id.equals(neighbour.getId()))
+                .findFirst()
+                .orElse(null);
+        return result;
+    }
+
+    @Override
+    public void changeStatus(Neighbour neighbour) {
+
+        neighbours.get(neighbours.indexOf(neighbour)).setFavorite();
     }
 }
